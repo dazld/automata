@@ -1,7 +1,12 @@
 (defproject automata "0.1.0-SNAPSHOT"
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
+  :description "A sample Clojure project for demoing capabilities of the Proto REPL package for the Atom editor."
+  :url "https://github.com/jasongilman/proto-repl-demo"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :dependencies [[org.clojure/clojure "1.6.0"]
-                 [quil "2.2.6"]])
+  :dependencies [[org.clojure/clojure "1.8.0"]
+                 [quil "2.4.0"]
+                 [proto-repl "0.1.2"]]
+
+  :profiles
+  {:dev {:source-paths ["dev" "src" "test"]
+         :dependencies [[org.clojure/tools.namespace "0.2.11"]]}})
