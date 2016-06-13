@@ -44,8 +44,6 @@
      :start-angle start
      :angle end}))
 
-
-
 (defn check-direction [angle direction]
   (if (> angle 360)
     -1
@@ -69,7 +67,16 @@
     {
      :arcs (map update-arc arcs)
      :time (mod (+ 1 (:time state)) 48)
-     }))
+
+     (defn paint [state]
+       (q/background 0)
+       (q/fill 255)
+       (let [time (:time state)
+             x (+ (/ (q/width ) 2) (* 100 (Math/sin (* tau time))))
+             y (+ (/ (q/height) 2) (* 100 (Math/sin (* 2 tau time))))
+             width 50
+             height 50]
+         (q/ellipse x y width height)))}))
 
 (defn draw-glitch [state]
   (doseq [a (range 3)]
@@ -81,15 +88,6 @@
     (aclone (q/pixels))))
 (defn draw-blur [])
 
-(defn paint [state]
-  (q/background 0)
-  (q/fill 255)
-  (let [time (:time state)
-        x (+ (/ (q/width ) 2) (* 100 (Math/sin (* tau time))))
-        y (+ (/ (q/height) 2) (* 100 (Math/sin (* 2 tau time))))
-        width 50
-        height 50]
-    (q/ellipse x y width height)))
 
 
 
@@ -106,27 +104,27 @@
       (let [arc (make-arc)
             x (q/noise n)
             y (q/noise (+ 1000 n))
-            gn (w (Math/abs (q/random-gaussian))  )]
+            gn (w (Math/abs (q/random-gaussian)))]
 
         (q/smooth)
         (q/no-fill)
         (q/stroke (* 255 n) (* 192 n) (* 32 n) 100)
-        '(q/arc x y gn gn (rads (:start-angle arc)) (rads (:angle arc)))))
+        '(q/arc x y gn gn (rads (:start-angle arc)) (rads (:angle arc)))))))
 
 
 
 ;         (q/save "output.png")
-  ))
 
-'(defn draw []
+
+(defn draw []
   (let [pix (q/pixels)]
     (doseq [x (range (q/width))
             y (range (q/height))]
       (let [bright (q/map-range (q/noise (* x 0.03) (* y 0.03)) 0 1 0 255)
 
             wid (q/width)]
-        (aset-int pix (+ x (* y wid)) (q/color bright))
-        )))
+        (aset-int pix (+ x (* y wid)) (q/color bright)))))
+
   (q/update-pixels))
 
 (q/defsketch automata

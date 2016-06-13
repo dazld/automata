@@ -55,19 +55,16 @@
   (q/rect (:x walker) (:y walker) 3 3))
 
 (defn draw-state [state]
-  '(q/background 255 )
-
+  '(q/background 255)
   (let [walkers (:walkers state)]
     (q/with-translation [(/ (q/width) 2)
                          (/ (q/height) 2)]
-
                         (doseq [walker walkers]
-
                           (pix walker)
-                          (draw-line (:x walker) (:y walker) 0 0 ))
+                          (draw-line (:x walker) (:y walker) 0 0)))))
 
 
-                        )))
+
 
 (q/defsketch automata
              :title "You spin my circle right round"

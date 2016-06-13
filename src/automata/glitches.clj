@@ -28,29 +28,28 @@
 (defn update-state [state]
   {
     :time (ctime)
-   })
+    :another 1
+    :thing 2})
+
 
 
 (defn paint [state]
-
   '(q/background 255)
   '(q/fill 255)
   (let [time (:time state)
-        x (+ (/ (q/width ) 2) (* 100 (q/sin (* tau time))))
+        x (+ (/ (q/width ) 2))(* 100 (q/sin (* tau time)))
         y (+ (/ (q/height) 2) (* 100 (q/sin (* 2 tau time))))
         width 50
         height 50]
     (q/ellipse x y width height)))
 
-
 (defn draw-glitch [state]
   (let [hw (/ (q/width) 2)
         hh (/ (q/height) 2)
         result (aclone (q/pixels))]
-    '(println (bit-and (q/color 2 55 0) 0xffffffff) )
+    '(println (bit-and (q/color 2 55 0) 0xffffffff))
     (doseq [a (range 30)]
       ;'(println a x y time (+ 1 (* 0.008 a aberration-amount)))
-
       (q/push-matrix)
       (q/translate hw hh)
       (q/scale (+ 1 (* 0.008 a aberration-amount)))
@@ -68,10 +67,7 @@
   '(paint state)
   (draw-glitch state)
   (q/with-translation [(/ (q/width) 2)
-                       (/ (q/height) 2)]
-
-
-                      )
+                       (/ (q/height) 2)])
   '(q/save "output.png"))
 
 

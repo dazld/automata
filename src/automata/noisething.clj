@@ -8,7 +8,7 @@
   (q/background 255)
   (q/color-mode :hsb)
   {:color 0
-   :angle 0 })
+   :angle 0})
 
 (defn update-state [state]
 
